@@ -1,0 +1,17 @@
+﻿################################################################################
+# 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
+################################################################################
+
+/.vs
+/.gitignore
+/Slave/MDK-ARM/MOTOR_CPP.uvguix.ayou
+/Slave/MDK-ARM/MOTOR_CPP.uvoptx
+/Slave/MDK-ARM/startup_stm32f407xx.lst
+/Slave/MDK-ARM/MOTOR_CPP/MOTOR_CPP.axf
+/Slave/MDK-ARM/MOTOR_CPP/MOTOR_CPP.build_log.htm
+/Slave/MDK-ARM/MOTOR_CPP/MOTOR_CPP.hex
+/Slave/MDK-ARM/MOTOR_CPP/MOTOR_CPP.htm
+/Slave/MDK-ARM/MOTOR_CPP/MOTOR_CPP.map
+/Slave/MDK-ARM/MOTOR_CPP/MOTOR_CPP.sct
+*.Bak
+/Slave/MDK-ARM/MOTOR_CPP/MOTOR_CPP_MOTOR_CPP.dep
