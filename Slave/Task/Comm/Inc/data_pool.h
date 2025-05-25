@@ -12,6 +12,9 @@
 
 #define ACTION_UART_SIZE 35
 
+// 板间主从通信串口DMA接收缓存数组，数据包长度为8字节
+#define InterBoardCommunication_UART_SIZE 10
+
 //队列大小
 #define CAN1_TxPort_SIZE 8
 #define CAN2_TxPort_SIZE 8
@@ -20,6 +23,7 @@
 #define Send_ROS_Port_SIZE 4
 #define Chassia_Port_SIZE 4
 #define Broadcast_Port_SIZE 2
+#define InterBoardCommunication_UART_Port_SIZE 1
 
 
 //can数据帧类型定义
@@ -45,8 +49,10 @@ extern xQueueHandle Recieve_ROS_Port;
 extern xQueueHandle Send_ROS_Port;
 extern xQueueHandle Chassia_Port;
 extern xQueueHandle Broadcast_Port;
+extern xQueueHandle InterBoardCommunication_UART_RX_Port;		// 板间通信串口DMA接收队列
 
 extern uint8_t Uart3_Rx_Buff[ACTION_UART_SIZE];
+extern uint8_t Uart1_Rx_Buff[InterBoardCommunication_UART_SIZE];	// 板间通信串口DMA接收缓存数组
 
 
 typedef enum CHASSIS_STATUS

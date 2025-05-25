@@ -18,9 +18,13 @@ QueueHandle_t Recieve_ROS_Port;
 QueueHandle_t Send_ROS_Port;
 QueueHandle_t Chassia_Port;
 QueueHandle_t Broadcast_Port;
+QueueHandle_t InterBoardCommunication_UART_RX_Port;     // 板间通信串口DMA接收队列
 
 //ROS串口接收缓存数组
 uint8_t Uart3_Rx_Buff[ACTION_UART_SIZE];
+
+// 板间主从通信串口DMA接收缓存数组
+uint8_t Uart1_Rx_Buff[InterBoardCommunication_UART_SIZE];
 
 
 /**
@@ -35,4 +39,5 @@ void DataPool_Init(void)
     Send_ROS_Port = xQueueCreate(Send_ROS_Port_SIZE, sizeof(Robot_Twist_t));
     Chassia_Port = xQueueCreate(Chassia_Port_SIZE, sizeof(CONTROL_T));
     Broadcast_Port = xQueueCreate(Broadcast_Port_SIZE, sizeof(Robot_Status_t));
+    InterBoardCommunication_UART_RX_Port = xQueueCreate(InterBoardCommunication_UART_SIZE, sizeof(Uart4_Rx_Buff));
 }

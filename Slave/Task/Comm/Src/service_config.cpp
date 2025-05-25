@@ -35,6 +35,7 @@ void System_Resource_Init(void)
     CAN_Filter_Init(&hcan2,CanFilter_14|CanFifo_0|Can_EXTID|Can_DataType,0,0);
     CAN_Filter_Init(&hcan2,CanFilter_15|CanFifo_1|Can_EXTID|Can_DataType,0,0);
 #endif
+    Uart_Init(&huart1, Uart1_Rx_Buff, InterBoardCommunication_UART_SIZE, InterBoardCommunication_UART1_RxCallback);     // 初始化板间通信所使用的串口
     App_Init();
 }
 
