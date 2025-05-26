@@ -16,21 +16,21 @@ bool Catcher :: Reset()
     static int start_time=get_systemTick()/1000;
     if(get_systemTick()/1000 - start_time > 1000)
     {
-        CatcherMotor.encoder_offset = CatcherMotor.get_encoder();
-        CatcherMotor.encoder_offset = CatcherMotor.get_encoder();
+        CatcherMotor[0].encoder_offset = CatcherMotor[0].get_encoder();
+        CatcherMotor[0].encoder_offset = CatcherMotor[0].get_encoder();
         machine_init_ = true;
     }
     else
     { 
-        CatcherMotor.Out = -200;
-        CatcherMotor.Out = 2000;
+        CatcherMotor[0].Out = -200;
+        CatcherMotor[0].Out = 2000;
         machine_init_ = false;
     }
 }
 
 void Catcher :: CatcherMotorCtrl()
 {
-    Motor_SendMsgs(&hcan1, CatcherMotor);
+    Motor_SendMsgs(&hcan1, CatcherMotor[0]);
 }
 
 void Catcher :: Catcher_Open(float open_angle)
@@ -49,11 +49,11 @@ void Catcher :: Catcher_Open(float open_angle)
         else{;}
 
         PidCatcherPos.target = open_angle;
-        PidCatcherPos.current = CatcherMotor.get_angle();
+        PidCatcherPos.current = CatcherMotor[0].get_angle();
 
         PidCatcherSpd.target = PidCatcherPos.Adjust();
-        PidCatcherSpd.current = CatcherMotor.get_speed();
-        CatcherMotor.Out = PidCatcherSpd.Adjust();
+        PidCatcherSpd.current = CatcherMotor[0].get_speed();
+        CatcherMotor[0].Out = PidCatcherSpd.Adjust();
 
 }
 
@@ -73,9 +73,9 @@ void Catcher :: Catcher_Close(float close_angle)
         else{;}
 
         PidCatcherPos.target = close_angle;
-        PidCatcherPos.current = CatcherMotor.get_angle();
+        PidCatcherPos.current = CatcherMotor[0].get_angle();
 
         PidCatcherSpd.target = PidCatcherPos.Adjust();
-        PidCatcherSpd.current = CatcherMotor.get_speed();
-        CatcherMotor.Out = PidCatcherSpd.Adjust();
+        PidCatcherSpd.current = CatcherMotor[0].get_speed();
+        CatcherMotor[0].Out = PidCatcherSpd.Adjust();
 }

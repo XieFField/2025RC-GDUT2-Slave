@@ -22,7 +22,7 @@ public:
         catcher_min_angle = min_angle;
     }
 
-    Motor_C620 CatcherMotor = Motor_C620(1); //??ID?1
+    Motor_C620 CatcherMotor[1] = {Motor_C620(1)}; //??ID?1
 
     bool Pid_Param_Init(float Kp, float Ki, float Kd, float Integral_Max, float OUT_Max, float DeadZone)
     {
