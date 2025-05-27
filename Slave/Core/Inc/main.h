@@ -60,10 +60,6 @@ void Error_Handler(void);
 #define Joy_Pin GPIO_PIN_7
 #define Joy_GPIO_Port GPIOF
 #define Joy_EXTI_IRQn EXTI9_5_IRQn
-#define Host_UART_RX_Pin GPIO_PIN_9
-#define Host_UART_RX_GPIO_Port GPIOA
-#define Host_UART_TX_Pin GPIO_PIN_10
-#define Host_UART_TX_GPIO_Port GPIOA
 
 /* USER CODE BEGIN Private defines */
 

@@ -4,13 +4,19 @@
  * @author      ZhangJiaJia (Zhang643328686@163.com)
  * @date        2025-05-25 (创建日期)
  * @date        2025-05-27 (最后修改日期)
- * @version     0.1.0
+ * @version     0.1.1
  * @note
  * @warning
  * @license     WTFPL License
  *
  * @par 版本修订历史
  * @{
+ *  @li 版本号: 0.1.1
+ *      - 修订日期: 2025-05-27
+ *      - 主要变更:
+ *			- 修复了CubeMX配置中的一些无害bug
+ *      - 作者: ZhangJiaJia
+ * 
  *	@li 版本号: 0.1.0
  *      - 修订日期: 2025-05-27
  *      - 主要变更:
