@@ -18,6 +18,8 @@ void CAN2_RxCallBack(CAN_RxBuffer *CAN_RxBuffer);	//CAN2接收回调函数
 
 uint32_t ROS_UART3_RxCallback(uint8_t* Receive_data, uint16_t data_len);    //UART3接收回调函数
 
+uint32_t InterBoardCommunication_UART1_RxCallback(uint8_t* Receive_data, uint16_t data_len) ; //板间通信UART1接收回调函数
+
 #ifdef __cplusplus 
 }
 #endif

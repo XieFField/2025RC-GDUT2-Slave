@@ -170,33 +170,17 @@ uint32_t ROS_UART3_RxCallback(uint8_t* Receive_data, uint16_t data_len)
 uint32_t InterBoardCommunication_UART1_RxCallback(uint8_t* Receive_data, uint16_t data_len)
 {
     BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-    //if (Receive_LaserModule1Data_Port != NULL)
-    //{
-    //    if (Receive_data != NULL)
-    //    {
 
-    if (xQueueSendFromISR(InterBoardCommunication_UART_RX_Port, Receive_data, &xHigherPriorityTaskWoken) == pdPASS)
+    if (xQueueOverwriteFromISR(InterBoardCommunication_UART_RX_Port, Receive_data, &xHigherPriorityTaskWoken) == pdPASS)
     {
         // 触发上下文切换（若需要）
         portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
-        return 1; // 发送成功
+        return 1;   // 发送成功
     }
     else
     {
-        if (xQueueReset(InterBoardCommunication_UART_RX_Port) == pdTRUE)
-        {
-            // 清空成功，重新发送
-            if (xQueueSendFromISR(InterBoardCommunication_UART_RX_Port, Receive_data, &xHigherPriorityTaskWoken) == pdPASS)
-            {
-                portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
-                return 1;   // 重新发送成功
-            }
-        }
         return 0;   // 队列操作失败
     }
-    //    }
-    //}
-
 }
 
 

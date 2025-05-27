@@ -3,7 +3,7 @@
  * @brief
  * @author      ZhangJiaJia (Zhang643328686@163.com)
  * @date        2025-05-25 (创建日期)
- * @date        2025-05-25 (最后修改日期)
+ * @date        2025-05-27 (最后修改日期)
  * @version     0.1.0
  * @note
  * @warning
@@ -12,9 +12,12 @@
  * @par 版本修订历史
  * @{
  *	@li 版本号: 0.1.0
- *      - 修订日期: 2025-05-
+ *      - 修订日期: 2025-05-27
  *      - 主要变更:
- *			- 
+ *			- 完成了板间通信任务的数据包格式解析工作，搭建了板间通信任务的框架
+ *      - 不足之处:
+ *			- 数据包语义解析工作还没有完成
+ *			- 功能状态量设置和处理不够完善
  *      - 作者: ZhangJiaJia
  * @}
  */
@@ -27,12 +30,12 @@
 #include <stdint.h>
 
 
-// C++语言部分
-#ifdef __cplusplus
-
-
-
-#endif
+// 对 InterBoardCommunication_Task 函数中的 State 的说明：
+// 0x00：板间通信功能正常
+// 0x01：板间通信功能自检错误，错误原因：等待超时
+// 0x02：板间通信功能自检错误，错误原因：自检数据包不匹配
+// 0x04：板间通信功能结构解析错误，错误原因：数据包结构解析错误
+// 0x08：板间通信功能语义解析错误，错误原因：未知解析命令
 
 
 // C语言部分
@@ -41,7 +44,14 @@ extern "C" {
 #endif
 
 void InterBoardCommunication_Task(void* argument);
+uint8_t InterBoardCommunication_PowerOnSelfTest(void);
+uint8_t InterBoardCommunication_StructureAnalysis(uint8_t* Uart_Rx_Buff, uint8_t* DataPacketsSemanticsBuff);
+uint8_t InterBoardCommunication_SemanticAnalysis(uint8_t* DataPacketsSemanticsBuff);
 
 #ifdef __cplusplus
 }
 #endif
+
+
+#endif
+

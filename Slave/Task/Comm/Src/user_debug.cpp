@@ -45,6 +45,11 @@ void User_Debug_Task(void *pvParameters)
 #else
     for(;;)
     {
+        for(uint8_t i = 0; i < 200; i++)
+		{
+			
+		}
+
         osDelay(1);
     }
 #endif

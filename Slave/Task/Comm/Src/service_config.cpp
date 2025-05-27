@@ -19,8 +19,8 @@ void System_Resource_Init(void)
     DataPool_Init();
     Timer_Init(&htim4,USE_HAL_DELAY);
     PWM_ReInit(4200-1,40000-1,&htim10,TIM_CHANNEL_1); //Air Joy
-    CAN_Init(&hcan1,CAN1_RxCallBack);
-    CAN_Init(&hcan2,CAN2_RxCallBack);
+    //CAN_Init(&hcan1,CAN1_RxCallBack);
+    //CAN_Init(&hcan2,CAN2_RxCallBack);
 #if USE_CAN1_STDID
     CAN_Filter_Init(&hcan1,CanFilter_0|CanFifo_0|Can_STDID|Can_DataType,0,0);
     CAN_Filter_Init(&hcan1,CanFilter_1|CanFifo_1|Can_STDID|Can_DataType,0,0);
@@ -35,7 +35,8 @@ void System_Resource_Init(void)
     CAN_Filter_Init(&hcan2,CanFilter_14|CanFifo_0|Can_EXTID|Can_DataType,0,0);
     CAN_Filter_Init(&hcan2,CanFilter_15|CanFifo_1|Can_EXTID|Can_DataType,0,0);
 #endif
-    Uart_Init(&huart1, Uart1_Rx_Buff, InterBoardCommunication_UART_SIZE, InterBoardCommunication_UART1_RxCallback);     // 初始化板间通信所使用的串口
+    // 串口1不知道为什么用不了
+    Uart_Init(&huart2, Uart2_Rx_Buff, InterBoardCommunication_UART_RX_SIZE, InterBoardCommunication_UART1_RxCallback);     // 初始化板间通信所使用的串口
     App_Init();
 }
 
