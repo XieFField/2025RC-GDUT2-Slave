@@ -4,13 +4,19 @@
  * @author      ZhangJiaJia (Zhang643328686@163.com)
  * @date        2025-05-25 (创建日期)
  * @date        2025-05-27 (最后修改日期)
- * @version     0.1.1
+ * @version     0.1.2
  * @note
  * @warning
  * @license     WTFPL License
  *
  * @par 版本修订历史
  * @{
+ *  @li 版本号: 0.1.2
+ *      - 修订日期: 2025-05-27
+ *      - 主要变更:
+ *			- 少量优化了程序
+ *      - 作者: ZhangJiaJia
+ *
  *  @li 版本号: 0.1.1
  *      - 修订日期: 2025-05-27
  *      - 主要变更:
@@ -50,9 +56,7 @@ extern "C" {
 #endif
 
 void InterBoardCommunication_Task(void* argument);
-uint8_t InterBoardCommunication_PowerOnSelfTest(void);
-uint8_t InterBoardCommunication_StructureAnalysis(uint8_t* Uart_Rx_Buff, uint8_t* DataPacketsSemanticsBuff);
-uint8_t InterBoardCommunication_SemanticAnalysis(uint8_t* DataPacketsSemanticsBuff);
+
 
 #ifdef __cplusplus
 }

@@ -4,13 +4,19 @@
  * @author      ZhangJiaJia (Zhang643328686@163.com)
  * @date        2025-05-25 (创建日期)
  * @date        2025-05-27 (最后修改日期)
- * @version     0.1.1
+ * @version     0.1.2
  * @note
  * @warning
  * @license     WTFPL License
  *
  * @par 版本修订历史
  * @{
+ *  @li 版本号: 0.1.2
+ *      - 修订日期: 2025-05-27
+ *      - 主要变更:
+ *			- 少量优化了程序
+ *      - 作者: ZhangJiaJia
+ * 
  *  @li 版本号: 0.1.1
  *      - 修订日期: 2025-05-27
  *      - 主要变更:
@@ -37,10 +43,16 @@
 #include "FreeRTOS.h"						// FreeRTOS 头文件
 #include "main.h"							// HAL 库头文件
 #include "task.h"							// FreeRTOS 头文件，但是我不知道要不要包含这个头文件
+#include "drive_uart.h"						// 串口驱动头文件
 #include "InterBoardCommunication_Task.h"	// 板间通信任务头文件
 
 
 uint8_t InterBoardCommunication_Rx_Buff[InterBoardCommunication_UART_RX_SIZE] = {0};
+
+
+static uint8_t InterBoardCommunication_PowerOnSelfTest(void);
+static uint8_t InterBoardCommunication_StructureAnalysis(uint8_t* Uart_Rx_Buff, uint8_t* DataPacketsSemanticsBuff);
+static uint8_t InterBoardCommunication_SemanticAnalysis(uint8_t* DataPacketsSemanticsBuff);
 
 
 /**
@@ -65,6 +77,8 @@ void InterBoardCommunication_Task(void* argument)
 
 	for (;;)
 	{
+		State = 0;		// 重置状态变量
+
 		// 等待接收数据
 		if (xQueueReceive(InterBoardCommunication_UART_RX_Port, InterBoardCommunication_Rx_Buff, pdTRUE) == pdPASS)
 		{
@@ -85,7 +99,7 @@ void InterBoardCommunication_Task(void* argument)
  * @return		uint8_t 返回自检状态
  * @note		无
  */
-uint8_t InterBoardCommunication_PowerOnSelfTest(void)
+static uint8_t InterBoardCommunication_PowerOnSelfTest(void)
 {
 	uint8_t State = 0;
 
@@ -120,7 +134,7 @@ uint8_t InterBoardCommunication_PowerOnSelfTest(void)
  * @note		如果解析失败，返回 0x04，并不更新 DataPacketsSemanticsBuff
  * @note		CRC8校验的计算使用的是外部黑箱函数，校验位计算范围为 Uart_Rx_Buff[2] 到 Uart_Rx_Buff[3] 的数据长度（即数据内容长度为 2 字节），CRC8 校验值存储在 Uart_Rx_Buff[4] 中
  */
-uint8_t InterBoardCommunication_StructureAnalysis(uint8_t* Uart_Rx_Buff, uint8_t* DataPacketsSemanticsBuff)
+static uint8_t InterBoardCommunication_StructureAnalysis(uint8_t* Uart_Rx_Buff, uint8_t* DataPacketsSemanticsBuff)
 {
 	uint8_t State = 0;
 	uint8_t CRC8 = 0;	// CRC8校验变量
@@ -183,7 +197,7 @@ uint8_t InterBoardCommunication_StructureAnalysis(uint8_t* Uart_Rx_Buff, uint8_t
  * @return		uint8_t 返回解析状态
  * @note		无
  */
-uint8_t InterBoardCommunication_SemanticAnalysis(uint8_t* DataPacketsSemanticsBuff)
+static uint8_t InterBoardCommunication_SemanticAnalysis(uint8_t* DataPacketsSemanticsBuff)
 {
 	uint8_t State = 0;
 
